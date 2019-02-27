@@ -191,6 +191,19 @@ abstract class CordovaHttp {
       request.acceptCharset(ACCEPTED_CHARSETS);
       request.headers(this.getHeadersMap());
       request.uncompress(true);
+      HttpsURLConnection conn = (HttpsURLConnection)request.getConnection();
+
+        try {
+            SSLContext sslContext = SSLContext.getInstance("TLS");
+            sslContext.init(null, null, null);
+            conn.setSSLSocketFactory(new TLSSocketFactory(sslContext));
+        } catch (NoSuchAlgorithmException e) {
+          e.printStackTrace();
+        } catch (KeyManagementException e) {
+           e.printStackTrace();
+        }
+    }
+
     }
 
     protected void prepareRequestBody(HttpRequest request) throws JSONException, Exception {
