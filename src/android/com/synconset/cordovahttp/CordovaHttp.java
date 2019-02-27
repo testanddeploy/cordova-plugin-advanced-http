@@ -209,8 +209,6 @@ abstract class CordovaHttp {
         }
     }
 
-    }
-
     protected void prepareRequestBody(HttpRequest request) throws JSONException, Exception {
       if ("json".equals(this.getSerializerName())) {
           request.send(this.getParamsObject().toString());
